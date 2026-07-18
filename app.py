@@ -20,14 +20,14 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.title("🔥 DEGEN SIGNALS ULTIMATE")
-st.markdown("**TradingView Charts • Holly AI Scanner • TradeZella Journal • Live Alerts • Moby Whales**")
+st.markdown("**TradingView Charts • Holly AI Scanner • TradeZella Journal • Live Alerts**")
 
 # Your NewsAPI Key
 NEWS_API_KEY = "cbbcea7b3a1645138a0d8fa5ec01c48c"
 
 # ====================== ASSETS ======================
 PRELOADED = {
-    # MEMECOINS (50+)
+    # MEMECOINS
     "PEPE": {"type": "memecoin", "price": 0.0000125, "change_pct": 15.3, "volume": 125000000, "avg_volume": 45000000, "ta_score": 62, "attention": 92, "catalyst": 45, "smart_money": 58, "notes": "Volume hype"},
     "WIF": {"type": "memecoin", "price": 2.45, "change_pct": 8.7, "volume": 89000000, "avg_volume": 65000000, "ta_score": 68, "attention": 85, "catalyst": 50, "smart_money": 62, "notes": "dogwifhat"},
     "BONK": {"type": "memecoin", "price": 0.000028, "change_pct": -4.2, "volume": 89000000, "avg_volume": 120000000, "ta_score": 38, "attention": 58, "catalyst": 30, "smart_money": 42, "notes": "Solana OG"},
@@ -50,7 +50,7 @@ PRELOADED = {
     "GME": {"type": "memecoin", "price": 0.018, "change_pct": 8.9, "volume": 45000000, "avg_volume": 35000000, "ta_score": 62, "attention": 72, "catalyst": 45, "smart_money": 50, "notes": "GME meme"},
     "TRUMP": {"type": "memecoin", "price": 12.5, "change_pct": 6.8, "volume": 98000000, "avg_volume": 75000000, "ta_score": 70, "attention": 85, "catalyst": 60, "smart_money": 65, "notes": "Political meme"},
     "HARRIS": {"type": "memecoin", "price": 0.085, "change_pct": 5.2, "volume": 42000000, "avg_volume": 32000000, "ta_score": 58, "attention": 68, "catalyst": 42, "smart_money": 48, "notes": "Political meme"},
-    # CRYPTO (50+)
+    # CRYPTO
     "SOL": {"type": "crypto", "price": 145.3, "change_pct": 3.2, "volume": 2500000000, "avg_volume": 1800000000, "ta_score": 75, "attention": 80, "catalyst": 70, "smart_money": 68, "notes": "High performance"},
     "BTC": {"type": "crypto", "price": 64200, "change_pct": 2.8, "volume": 42000000000, "avg_volume": 38000000000, "ta_score": 82, "attention": 75, "catalyst": 60, "smart_money": 78, "notes": "Digital gold"},
     "ETH": {"type": "crypto", "price": 3180, "change_pct": 4.1, "volume": 18000000000, "avg_volume": 15000000000, "ta_score": 79, "attention": 72, "catalyst": 65, "smart_money": 70, "notes": "World computer"},
@@ -69,7 +69,7 @@ PRELOADED = {
     "UNI": {"type": "crypto", "price": 9.85, "change_pct": 5.2, "volume": 420000000, "avg_volume": 380000000, "ta_score": 69, "attention": 60, "catalyst": 65, "smart_money": 62, "notes": "Uniswap"},
     "LTC": {"type": "crypto", "price": 95.5, "change_pct": 3.8, "volume": 650000000, "avg_volume": 580000000, "ta_score": 67, "attention": 55, "catalyst": 58, "smart_money": 60, "notes": "Litecoin"},
     "BCH": {"type": "crypto", "price": 385, "change_pct": 4.1, "volume": 420000000, "avg_volume": 380000000, "ta_score": 66, "attention": 52, "catalyst": 55, "smart_money": 58, "notes": "Bitcoin Cash"},
-    # STOCKS (50+)
+    # STOCKS
     "NVDA": {"type": "stock", "price": 120.5, "change_pct": 1.8, "volume": 45000000, "avg_volume": 38000000, "ta_score": 82, "attention": 78, "catalyst": 85, "smart_money": 80, "notes": "AI leader"},
     "AMD": {"type": "stock", "price": 550.25, "change_pct": 2.1, "volume": 28500000, "avg_volume": 22000000, "ta_score": 78, "attention": 65, "catalyst": 90, "smart_money": 72, "notes": "AI + earnings"},
     "MSTR": {"type": "stock", "price": 94.64, "change_pct": 0.8, "volume": 15000000, "avg_volume": 12000000, "ta_score": 85, "attention": 92, "catalyst": 75, "smart_money": 88, "notes": "Bitcoin treasury"},
@@ -178,7 +178,6 @@ with tab3:
         try:
             hist = yf.download(ticker, period="3mo", progress=False)
             if not hist.empty:
-                # Indicators
                 delta = hist['Close'].diff()
                 gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
                 loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
@@ -203,7 +202,6 @@ with tab3:
                 fig.update_layout(title=f"{ticker} TradingView Chart + Indicators", yaxis2=dict(title="RSI", overlaying='y', side='right'), yaxis3=dict(title="MACD", overlaying='y', side='right', anchor="free"))
                 st.plotly_chart(fig, use_container_width='stretch')
 
-                # Alerts
                 current_rsi = rsi.iloc[-1]
                 if current_rsi > 70:
                     st.warning(f"⚠️ TradingView Alert: RSI Overbought for {ticker} ({current_rsi:.1f})")
@@ -286,4 +284,4 @@ with tab7:
         else:
             st.info("No high-confluence signals right now.")
 
-st.caption("Degen Signals Ultimate • Not financial advice • TradingView + Holly AI + TradeZella style")
+st.caption("Degen Signals Ultimate • Not financial advice")
