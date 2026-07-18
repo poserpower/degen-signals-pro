@@ -81,8 +81,13 @@ def label_wallets_real(df):
 
 labeled_wallets = label_wallets_real(user_wallets)
 
-# PRELOADED (paste your full dict here)
-PRELOADED = { ... }  # Your full PRELOADED dict from earlier
+# PRELOADED assets (safe starter - expand with your tokens)
+PRELOADED = {
+    "PEEPO": {"price": 0.000012, "change_pct": 45.2, "volume": 1250000},
+    "SOL": {"price": 145.67, "change_pct": -1.2, "volume": 890000000},
+    "BONK": {"price": 0.000021, "change_pct": 12.5, "volume": 450000000},
+    "WIF": {"price": 2.45, "change_pct": 8.7, "volume": 320000000},
+}
 
 # Tabs
 tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
@@ -90,11 +95,19 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "📈 Feeds", "🔔 Alerts", "🔗 Integrations", "🧠 Your Wallets"
 ])
 
-# Example tabs (expand as needed - all dataframes now use width='stretch')
 with tab1:
     st.header("📊 Discovery / Screener")
-    screener_df = pd.DataFrame([{"Token": k, "Price": v.get("price", 0), "Change%": v.get("change_pct", 0), "Volume": v.get("volume", 0)} for k, v in list(PRELOADED.items())[:30]])
+    screener_df = pd.DataFrame([{"Token": k, "Price": v.get("price", 0), "Change%": v.get("change_pct", 0), "Volume": v.get("volume", 0)} for k, v in PRELOADED.items()])
     st.dataframe(screener_df, width='stretch')
+
+with tab2:
+    st.header("🐳 Sonar / Whale Watch")
+    st.dataframe(labeled_wallets.head(10)[["address", "name", "Label", "PNL_30d"]], width='stretch')
+
+with tab3:
+    st.header("💎 Smart Money Holdings")
+    smart_df = labeled_wallets[labeled_wallets["Label"].str.contains("Smart|Whale|High PNL", na=False)]
+    st.dataframe(smart_df[["address", "name", "Label", "PNL_30d"]], width='stretch')
 
 with tab7:
     st.header("🧠 Your Wallets")
@@ -104,4 +117,4 @@ with tab7:
     csv = labeled_wallets.to_csv(index=False).encode('utf-8')
     st.download_button("📥 Download Labeled CSV", csv, "degenseye_labeled_wallets.csv", "text/csv")
 
-st.caption("Degens Eye • All deprecation warnings fixed • Live at degeneyes.streamlit.app")
+st.caption("Degens Eye • Fully fixed • Live at degeneyes.streamlit.app")
