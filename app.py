@@ -27,7 +27,7 @@ NEWS_API_KEY = "cbbcea7b3a1645138a0d8fa5ec01c48c"
 
 # ====================== ASSETS ======================
 PRELOADED = {
-    # MEMECOINS (50+)
+    # MEMECOINS
     "PEPE": {"type": "memecoin", "price": 0.0000125, "change_pct": 15.3, "volume": 125000000, "avg_volume": 45000000, "ta_score": 62, "attention": 92, "catalyst": 45, "smart_money": 58, "notes": "Volume hype"},
     "WIF": {"type": "memecoin", "price": 2.45, "change_pct": 8.7, "volume": 89000000, "avg_volume": 65000000, "ta_score": 68, "attention": 85, "catalyst": 50, "smart_money": 62, "notes": "dogwifhat"},
     "BONK": {"type": "memecoin", "price": 0.000028, "change_pct": -4.2, "volume": 89000000, "avg_volume": 120000000, "ta_score": 38, "attention": 58, "catalyst": 30, "smart_money": 42, "notes": "Solana OG"},
@@ -50,9 +50,7 @@ PRELOADED = {
     "GME": {"type": "memecoin", "price": 0.018, "change_pct": 8.9, "volume": 45000000, "avg_volume": 35000000, "ta_score": 62, "attention": 72, "catalyst": 45, "smart_money": 50, "notes": "GME meme"},
     "TRUMP": {"type": "memecoin", "price": 12.5, "change_pct": 6.8, "volume": 98000000, "avg_volume": 75000000, "ta_score": 70, "attention": 85, "catalyst": 60, "smart_money": 65, "notes": "Political meme"},
     "HARRIS": {"type": "memecoin", "price": 0.085, "change_pct": 5.2, "volume": 42000000, "avg_volume": 32000000, "ta_score": 58, "attention": 68, "catalyst": 42, "smart_money": 48, "notes": "Political meme"},
-    # Add more to reach 50
-
-    # CRYPTO (50+)
+    # CRYPTO
     "SOL": {"type": "crypto", "price": 145.3, "change_pct": 3.2, "volume": 2500000000, "avg_volume": 1800000000, "ta_score": 75, "attention": 80, "catalyst": 70, "smart_money": 68, "notes": "High performance"},
     "BTC": {"type": "crypto", "price": 64200, "change_pct": 2.8, "volume": 42000000000, "avg_volume": 38000000000, "ta_score": 82, "attention": 75, "catalyst": 60, "smart_money": 78, "notes": "Digital gold"},
     "ETH": {"type": "crypto", "price": 3180, "change_pct": 4.1, "volume": 18000000000, "avg_volume": 15000000000, "ta_score": 79, "attention": 72, "catalyst": 65, "smart_money": 70, "notes": "World computer"},
@@ -71,9 +69,7 @@ PRELOADED = {
     "UNI": {"type": "crypto", "price": 9.85, "change_pct": 5.2, "volume": 420000000, "avg_volume": 380000000, "ta_score": 69, "attention": 60, "catalyst": 65, "smart_money": 62, "notes": "Uniswap"},
     "LTC": {"type": "crypto", "price": 95.5, "change_pct": 3.8, "volume": 650000000, "avg_volume": 580000000, "ta_score": 67, "attention": 55, "catalyst": 58, "smart_money": 60, "notes": "Litecoin"},
     "BCH": {"type": "crypto", "price": 385, "change_pct": 4.1, "volume": 420000000, "avg_volume": 380000000, "ta_score": 66, "attention": 52, "catalyst": 55, "smart_money": 58, "notes": "Bitcoin Cash"},
-    # Add more to reach 50+
-
-    # STOCKS (50+)
+    # STOCKS
     "NVDA": {"type": "stock", "price": 120.5, "change_pct": 1.8, "volume": 45000000, "avg_volume": 38000000, "ta_score": 82, "attention": 78, "catalyst": 85, "smart_money": 80, "notes": "AI leader"},
     "AMD": {"type": "stock", "price": 550.25, "change_pct": 2.1, "volume": 28500000, "avg_volume": 22000000, "ta_score": 78, "attention": 65, "catalyst": 90, "smart_money": 72, "notes": "AI + earnings"},
     "MSTR": {"type": "stock", "price": 94.64, "change_pct": 0.8, "volume": 15000000, "avg_volume": 12000000, "ta_score": 85, "attention": 92, "catalyst": 75, "smart_money": 88, "notes": "Bitcoin treasury"},
@@ -92,7 +88,6 @@ PRELOADED = {
     "RIOT": {"type": "stock", "price": 9.85, "change_pct": 4.1, "volume": 38000000, "avg_volume": 32000000, "ta_score": 66, "attention": 58, "catalyst": 62, "smart_money": 55, "notes": "Bitcoin mining"},
     "IREN": {"type": "stock", "price": 40.77, "change_pct": 0.9, "volume": 13000000, "avg_volume": 9500000, "ta_score": 74, "attention": 65, "catalyst": 70, "smart_money": 68, "notes": "Bitcoin mining + HPC"},
     "CLSK": {"type": "stock", "price": 12.4, "change_pct": 2.8, "volume": 25000000, "avg_volume": 21000000, "ta_score": 65, "attention": 55, "catalyst": 60, "smart_money": 58, "notes": "Bitcoin mining"},
-    # Add more stocks to reach 50+
 }
 
 @st.cache_data(ttl=60)
@@ -140,7 +135,7 @@ with tab1:
     st.subheader("🔥 LIVE SIGNAL SCANNER")
     high_alpha = df[df["Alpha Score"] >= 70]
     if not high_alpha.empty:
-        st.dataframe(high_alpha[["Symbol", "Action", "Alpha Score", "RVOL", "Anomaly", "Chg %", "RR"]], use_container_width=True)
+        st.dataframe(high_alpha[["Symbol", "Action", "Alpha Score", "RVOL", "Anomaly", "Chg %", "RR"]], use_container_width='stretch')
 
     st.subheader("🔥 Top Trade Ideas")
     cols = st.columns(4)
@@ -156,7 +151,7 @@ with tab1:
             """, unsafe_allow_html=True)
 
     st.subheader("📋 Full Live Signal Table")
-    st.dataframe(df, use_container_width=True, hide_index=True)
+    st.dataframe(df, use_container_width='stretch', hide_index=True)
 
 # DexScreener
 with tab2:
@@ -171,7 +166,7 @@ with tab2:
                  "24h Chg%": float(p.get("priceChange", {}).get("h24", 0) or 0),
                  "24h Vol": float(p.get("volume", {}).get("h24", 0) or 0),
                  "Liquidity": float(p.get("liquidity", {}).get("usd", 0) or 0)} for p in pairs]
-        st.dataframe(pd.DataFrame(data), use_container_width=True)
+        st.dataframe(pd.DataFrame(data), use_container_width='stretch')
     except:
         st.warning("DexScreener fetch failed — demo mode")
 
@@ -183,7 +178,6 @@ with tab3:
         try:
             hist = yf.download(ticker, period="3mo", progress=False)
             if not hist.empty:
-                # Candlestick + RSI + MACD
                 delta = hist['Close'].diff()
                 gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
                 loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
@@ -201,9 +195,8 @@ with tab3:
                 fig.add_trace(go.Scatter(x=hist.index, y=macd, name="MACD", yaxis="y3"))
                 fig.add_trace(go.Scatter(x=hist.index, y=signal, name="Signal", yaxis="y3"))
                 fig.update_layout(title=f"{ticker} TrendSpider Chart + RSI + MACD", yaxis2=dict(title="RSI", overlaying='y', side='right'), yaxis3=dict(title="MACD", overlaying='y', side='right', anchor="free"))
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, use_container_width='stretch')
 
-                # Alerts
                 current_rsi = rsi.iloc[-1]
                 if current_rsi > 70:
                     st.warning(f"⚠️ TrendSpider Alert: RSI Overbought for {ticker} ({current_rsi:.1f})")
@@ -242,7 +235,7 @@ with tab5:
     st.header("🐋 Moby Smart Money & Whale Tracker")
     st.subheader("Smart Money Scores")
     sm_df = pd.DataFrame([{"Symbol": k, "Smart Money Score": v["smart_money"], "Type": v["type"]} for k, v in PRELOADED.items()]).sort_values("Smart Money Score", ascending=False)
-    st.dataframe(sm_df.head(20), use_container_width=True)
+    st.dataframe(sm_df.head(20), use_container_width='stretch')
 
     st.subheader("Whale Activity Tracker")
     st.markdown("**Demo Whale Flows** (Add Arkham/Nansen for real-time)")
@@ -250,7 +243,7 @@ with tab5:
         {"Wallet": "Smart Money #1", "Action": "Large Buy", "Amount USD": 1250000, "Token": "ANSEM", "Time": "2h ago"},
         {"Wallet": "Whale Cluster", "Action": "Accumulation", "Amount USD": 890000, "Token": "MOODENG", "Time": "5h ago"},
     ])
-    st.dataframe(whale_data, use_container_width=True)
+    st.dataframe(whale_data, use_container_width='stretch')
 
 # Trade Journal
 with tab6:
@@ -270,7 +263,7 @@ with tab6:
             st.session_state.trades = pd.concat([st.session_state.trades, new], ignore_index=True)
             st.success("Trade logged!")
     if not st.session_state.trades.empty:
-        st.dataframe(st.session_state.trades, use_container_width=True)
+        st.dataframe(st.session_state.trades, use_container_width='stretch')
         st.metric("Total P&L", f"${st.session_state.trades['P&L'].sum():.2f}")
 
 # Thinkorswim Backtesting
@@ -278,6 +271,6 @@ with tab7:
     st.header("📉 Thinkorswim Style Backtesting")
     ticker = st.selectbox("Ticker", list(PRELOADED.keys()), key="backtest_ticker")
     if st.button("Run Backtest", key="run_backtest"):
-        st.success(f"Demo Thinkorswim-style backtest ready for {ticker} (IV & Greeks simulation available).")
+        st.success(f"Demo Thinkorswim-style backtest ready for {ticker}.")
 
-st.caption("Degen Signals Ultimate • Not financial advice • All premium features integrated")
+st.caption("Degen Signals Ultimate • Not financial advice")
