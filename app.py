@@ -20,12 +20,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.title("🔥 DEGEN SIGNALS ULTIMATE")
-st.markdown("**50+ Memecoins • 50+ Crypto • 50+ Stocks • Live Tools • Moby + DexScreener**")
+st.markdown("**Live News • Alerts • Smart Money • Whales • DexScreener**")
 
-# API Keys
-NEWS_API_KEY = st.sidebar.text_input("NewsAPI Key (free at newsapi.org)", type="password")
+# Your NewsAPI Key
+NEWS_API_KEY = "cbbcea7b3a1645138a0d8fa5ec01c48c"
 
-# ====================== TOP 50+ ASSETS ======================
+# ====================== ASSETS ======================
 PRELOADED = {
     # MEMECOINS (50+)
     "PEPE": {"type": "memecoin", "price": 0.0000125, "change_pct": 15.3, "volume": 125000000, "avg_volume": 45000000, "ta_score": 62, "attention": 92, "catalyst": 45, "smart_money": 58, "notes": "Volume hype"},
@@ -50,9 +50,9 @@ PRELOADED = {
     "GME": {"type": "memecoin", "price": 0.018, "change_pct": 8.9, "volume": 45000000, "avg_volume": 35000000, "ta_score": 62, "attention": 72, "catalyst": 45, "smart_money": 50, "notes": "GME meme"},
     "TRUMP": {"type": "memecoin", "price": 12.5, "change_pct": 6.8, "volume": 98000000, "avg_volume": 75000000, "ta_score": 70, "attention": 85, "catalyst": 60, "smart_money": 65, "notes": "Political meme"},
     "HARRIS": {"type": "memecoin", "price": 0.085, "change_pct": 5.2, "volume": 42000000, "avg_volume": 32000000, "ta_score": 58, "attention": 68, "catalyst": 42, "smart_money": 48, "notes": "Political meme"},
-    # (You can add the remaining to reach exactly 50)
+    # Add more to reach 50 if needed
 
-    # === TOP 50 CRYPTO ===
+    # CRYPTO (50+)
     "SOL": {"type": "crypto", "price": 145.3, "change_pct": 3.2, "volume": 2500000000, "avg_volume": 1800000000, "ta_score": 75, "attention": 80, "catalyst": 70, "smart_money": 68, "notes": "High performance"},
     "BTC": {"type": "crypto", "price": 64200, "change_pct": 2.8, "volume": 42000000000, "avg_volume": 38000000000, "ta_score": 82, "attention": 75, "catalyst": 60, "smart_money": 78, "notes": "Digital gold"},
     "ETH": {"type": "crypto", "price": 3180, "change_pct": 4.1, "volume": 18000000000, "avg_volume": 15000000000, "ta_score": 79, "attention": 72, "catalyst": 65, "smart_money": 70, "notes": "World computer"},
@@ -71,9 +71,9 @@ PRELOADED = {
     "UNI": {"type": "crypto", "price": 9.85, "change_pct": 5.2, "volume": 420000000, "avg_volume": 380000000, "ta_score": 69, "attention": 60, "catalyst": 65, "smart_money": 62, "notes": "Uniswap"},
     "LTC": {"type": "crypto", "price": 95.5, "change_pct": 3.8, "volume": 650000000, "avg_volume": 580000000, "ta_score": 67, "attention": 55, "catalyst": 58, "smart_money": 60, "notes": "Litecoin"},
     "BCH": {"type": "crypto", "price": 385, "change_pct": 4.1, "volume": 420000000, "avg_volume": 380000000, "ta_score": 66, "attention": 52, "catalyst": 55, "smart_money": 58, "notes": "Bitcoin Cash"},
-    # Add the remaining to reach 50
+    # Add more to reach 50+
 
-    # === TOP 50 STOCKS ===
+    # STOCKS (50+)
     "NVDA": {"type": "stock", "price": 120.5, "change_pct": 1.8, "volume": 45000000, "avg_volume": 38000000, "ta_score": 82, "attention": 78, "catalyst": 85, "smart_money": 80, "notes": "AI leader"},
     "AMD": {"type": "stock", "price": 550.25, "change_pct": 2.1, "volume": 28500000, "avg_volume": 22000000, "ta_score": 78, "attention": 65, "catalyst": 90, "smart_money": 72, "notes": "AI + earnings"},
     "MSTR": {"type": "stock", "price": 94.64, "change_pct": 0.8, "volume": 15000000, "avg_volume": 12000000, "ta_score": 85, "attention": 92, "catalyst": 75, "smart_money": 88, "notes": "Bitcoin treasury"},
@@ -92,7 +92,7 @@ PRELOADED = {
     "RIOT": {"type": "stock", "price": 9.85, "change_pct": 4.1, "volume": 38000000, "avg_volume": 32000000, "ta_score": 66, "attention": 58, "catalyst": 62, "smart_money": 55, "notes": "Bitcoin mining"},
     "IREN": {"type": "stock", "price": 40.77, "change_pct": 0.9, "volume": 13000000, "avg_volume": 9500000, "ta_score": 74, "attention": 65, "catalyst": 70, "smart_money": 68, "notes": "Bitcoin mining + HPC"},
     "CLSK": {"type": "stock", "price": 12.4, "change_pct": 2.8, "volume": 25000000, "avg_volume": 21000000, "ta_score": 65, "attention": 55, "catalyst": 60, "smart_money": 58, "notes": "Bitcoin mining"},
-    # Add more stocks to reach 50
+    # Add more stocks to reach 50+
 }
 
 @st.cache_data(ttl=60)
@@ -117,7 +117,7 @@ def get_signal(scores, change_pct):
 # Tabs
 tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "🚀 Live Dashboard + Scanner", "📊 DexScreener Live", "📈 TradingView Charts", 
-    "📰 News & Alerts", "🐋 Moby + DexScreener Smart Money & Whales", "📉 Trade Journal", "📉 Backtesting"
+    "📰 Live News & Alerts", "🐋 Smart Money & Whales", "📉 Trade Journal", "📉 Backtesting"
 ])
 
 # Live Dashboard
@@ -189,42 +189,50 @@ with tab3:
         except:
             st.error("Chart failed")
 
-# News & Alerts
+# Live News & Alerts
 with tab4:
-    st.header("📰 News & Alerts")
-    if NEWS_API_KEY:
-        try:
-            r = requests.get(f"https://newsapi.org/v2/everything?q=crypto&apiKey={NEWS_API_KEY}", timeout=10)
-            articles = r.json().get("articles", [])[:5]
-            for article in articles:
-                st.write(f"**{article['title']}** - {article['source']['name']}")
-                st.write(article['url'])
-        except:
-            st.warning("News fetch failed")
-    else:
-        st.info("Enter NewsAPI key in sidebar for live news.")
+    st.header("📰 Live News & Alerts")
+    
+    st.subheader("Live News Tracker")
+    try:
+        r = requests.get(f"https://newsapi.org/v2/everything?q=crypto OR bitcoin OR solana&apiKey={NEWS_API_KEY}&pageSize=10", timeout=10)
+        articles = r.json().get("articles", [])
+        for article in articles:
+            st.markdown(f"**{article['title']}**  \n{article['source']['name']} • {article.get('publishedAt', '')[:10]}")
+            st.write(article['url'])
+            st.divider()
+    except:
+        st.warning("News fetch failed. Check your key.")
+
+    st.subheader("🔔 Alerts")
+    alert_symbol = st.selectbox("Asset", list(PRELOADED.keys()), key="alert_symbol")
+    alert_threshold = st.slider("Alpha Score Threshold", 50, 95, 75, key="alert_threshold")
+    
+    if st.button("Check / Trigger Alert", key="check_alert"):
+        sc = calculate_scores_cached(PRELOADED[alert_symbol])
+        if sc["alpha_score"] >= alert_threshold:
+            st.success(f"🚨 ALERT: {alert_symbol} Alpha = {sc['alpha_score']}")
+        else:
+            st.info(f"No alert — {alert_symbol} Alpha = {sc['alpha_score']}")
 
 # Moby + DexScreener Smart Money & Whales
 with tab5:
-    st.header("🐋 Moby + DexScreener Smart Money & Whale Tracking")
+    st.header("🐋 Smart Money & Whale Tracker")
     st.subheader("Smart Money Scores")
     sm_df = pd.DataFrame([{"Symbol": k, "Smart Money Score": v["smart_money"], "Type": v["type"]} for k, v in PRELOADED.items()]).sort_values("Smart Money Score", ascending=False)
     st.dataframe(sm_df.head(20), use_container_width=True)
 
     st.subheader("Whale Activity Tracker")
-    st.markdown("**Demo Whale Flows** (Add Arkham / Nansen for real-time)")
+    st.markdown("**Demo Whale Flows** (Add Arkham/Nansen for real-time)")
     whale_data = pd.DataFrame([
         {"Wallet": "Smart Money #1", "Action": "Large Buy", "Amount USD": 1250000, "Token": "ANSEM", "Time": "2h ago"},
         {"Wallet": "Whale Cluster", "Action": "Accumulation", "Amount USD": 890000, "Token": "MOODENG", "Time": "5h ago"},
     ])
     st.dataframe(whale_data, use_container_width=True)
 
-    st.subheader("Tools Used")
-    st.markdown("Arkham • Nansen • The Graph • Covalent • Dune Analytics")
-
 # Trade Journal
 with tab6:
-    st.header("📉 Trade Journal (Tradezella Style)")
+    st.header("📉 Trade Journal")
     if 'trades' not in st.session_state:
         st.session_state.trades = pd.DataFrame(columns=["Date", "Symbol", "Action", "Entry", "Exit", "P&L", "Notes"])
     with st.form("log_trade"):
@@ -250,4 +258,4 @@ with tab7:
     if st.button("Run Backtest", key="run_backtest"):
         st.success(f"Demo backtest ready for {ticker}.")
 
-st.caption("Degen Signals Ultimate • Not financial advice • All features & APIs integrated")
+st.caption("Degen Signals Ultimate • Not financial advice")
