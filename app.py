@@ -1,4 +1,3 @@
-# degen-signals-pro
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -264,4 +263,3 @@ with tab6:
     st.success("All pro features integrated: On-chain whales, Alpha Vantage news, backtesting, pre-loaded tokens, and more!")
 
 st.caption("Degen Signals Ultimate — the closest free single-app equivalent to top paid trackers + on-chain + news APIs. Deploy to Streamlit Cloud now!")
-requirements.txt 
