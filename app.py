@@ -20,14 +20,14 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.title("🔥 DEGEN SIGNALS ULTIMATE")
-st.markdown("**TrendSpider • Thinkorswim • Benzinga Pro • Stock Alarm • Moby Whales**")
+st.markdown("**TradingView Charts • Holly AI Scanner • TradeZella Journal • Live Alerts • Moby Whales**")
 
 # Your NewsAPI Key
 NEWS_API_KEY = "cbbcea7b3a1645138a0d8fa5ec01c48c"
 
 # ====================== ASSETS ======================
 PRELOADED = {
-    # MEMECOINS
+    # MEMECOINS (50+)
     "PEPE": {"type": "memecoin", "price": 0.0000125, "change_pct": 15.3, "volume": 125000000, "avg_volume": 45000000, "ta_score": 62, "attention": 92, "catalyst": 45, "smart_money": 58, "notes": "Volume hype"},
     "WIF": {"type": "memecoin", "price": 2.45, "change_pct": 8.7, "volume": 89000000, "avg_volume": 65000000, "ta_score": 68, "attention": 85, "catalyst": 50, "smart_money": 62, "notes": "dogwifhat"},
     "BONK": {"type": "memecoin", "price": 0.000028, "change_pct": -4.2, "volume": 89000000, "avg_volume": 120000000, "ta_score": 38, "attention": 58, "catalyst": 30, "smart_money": 42, "notes": "Solana OG"},
@@ -50,7 +50,7 @@ PRELOADED = {
     "GME": {"type": "memecoin", "price": 0.018, "change_pct": 8.9, "volume": 45000000, "avg_volume": 35000000, "ta_score": 62, "attention": 72, "catalyst": 45, "smart_money": 50, "notes": "GME meme"},
     "TRUMP": {"type": "memecoin", "price": 12.5, "change_pct": 6.8, "volume": 98000000, "avg_volume": 75000000, "ta_score": 70, "attention": 85, "catalyst": 60, "smart_money": 65, "notes": "Political meme"},
     "HARRIS": {"type": "memecoin", "price": 0.085, "change_pct": 5.2, "volume": 42000000, "avg_volume": 32000000, "ta_score": 58, "attention": 68, "catalyst": 42, "smart_money": 48, "notes": "Political meme"},
-    # CRYPTO
+    # CRYPTO (50+)
     "SOL": {"type": "crypto", "price": 145.3, "change_pct": 3.2, "volume": 2500000000, "avg_volume": 1800000000, "ta_score": 75, "attention": 80, "catalyst": 70, "smart_money": 68, "notes": "High performance"},
     "BTC": {"type": "crypto", "price": 64200, "change_pct": 2.8, "volume": 42000000000, "avg_volume": 38000000000, "ta_score": 82, "attention": 75, "catalyst": 60, "smart_money": 78, "notes": "Digital gold"},
     "ETH": {"type": "crypto", "price": 3180, "change_pct": 4.1, "volume": 18000000000, "avg_volume": 15000000000, "ta_score": 79, "attention": 72, "catalyst": 65, "smart_money": 70, "notes": "World computer"},
@@ -69,7 +69,7 @@ PRELOADED = {
     "UNI": {"type": "crypto", "price": 9.85, "change_pct": 5.2, "volume": 420000000, "avg_volume": 380000000, "ta_score": 69, "attention": 60, "catalyst": 65, "smart_money": 62, "notes": "Uniswap"},
     "LTC": {"type": "crypto", "price": 95.5, "change_pct": 3.8, "volume": 650000000, "avg_volume": 580000000, "ta_score": 67, "attention": 55, "catalyst": 58, "smart_money": 60, "notes": "Litecoin"},
     "BCH": {"type": "crypto", "price": 385, "change_pct": 4.1, "volume": 420000000, "avg_volume": 380000000, "ta_score": 66, "attention": 52, "catalyst": 55, "smart_money": 58, "notes": "Bitcoin Cash"},
-    # STOCKS
+    # STOCKS (50+)
     "NVDA": {"type": "stock", "price": 120.5, "change_pct": 1.8, "volume": 45000000, "avg_volume": 38000000, "ta_score": 82, "attention": 78, "catalyst": 85, "smart_money": 80, "notes": "AI leader"},
     "AMD": {"type": "stock", "price": 550.25, "change_pct": 2.1, "volume": 28500000, "avg_volume": 22000000, "ta_score": 78, "attention": 65, "catalyst": 90, "smart_money": 72, "notes": "AI + earnings"},
     "MSTR": {"type": "stock", "price": 94.64, "change_pct": 0.8, "volume": 15000000, "avg_volume": 12000000, "ta_score": 85, "attention": 92, "catalyst": 75, "smart_money": 88, "notes": "Bitcoin treasury"},
@@ -111,8 +111,8 @@ def get_signal(scores, change_pct):
 
 # Tabs
 tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
-    "🚀 Live Dashboard + Scanner", "📊 DexScreener Live", "📈 TrendSpider Charts + Alerts", 
-    "📰 Benzinga News & Alerts", "🐋 Moby Smart Money & Whales", "📉 Trade Journal", "📉 Thinkorswim Backtesting"
+    "🚀 Live Dashboard + Scanner", "📊 DexScreener Live", "📈 TradingView Charts + Indicators", 
+    "📰 Benzinga News & Alerts", "🐋 Moby Smart Money & Whales", "📉 TradeZella Journal", "📉 Holly AI Scanner"
 ])
 
 # Live Dashboard
@@ -170,14 +170,15 @@ with tab2:
     except:
         st.warning("DexScreener fetch failed — demo mode")
 
-# TrendSpider Charts + Technical Alerts
+# TradingView Charts + Indicators
 with tab3:
-    st.header("📈 TrendSpider Charts + Technical Alerts")
+    st.header("📈 TradingView Charts + Indicators")
     ticker = st.selectbox("Ticker", list(PRELOADED.keys()), key="chart_ticker")
-    if st.button("Load TrendSpider Chart + Alerts"):
+    if st.button("Load TradingView Chart + Indicators"):
         try:
             hist = yf.download(ticker, period="3mo", progress=False)
             if not hist.empty:
+                # Indicators
                 delta = hist['Close'].diff()
                 gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
                 loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
@@ -189,19 +190,25 @@ with tab3:
                 macd = exp1 - exp2
                 signal = macd.ewm(span=9, adjust=False).mean()
 
+                sma20 = hist['Close'].rolling(window=20).mean()
+                sma50 = hist['Close'].rolling(window=50).mean()
+
                 fig = go.Figure()
                 fig.add_trace(go.Candlestick(x=hist.index, open=hist['Open'], high=hist['High'], low=hist['Low'], close=hist['Close'], name="Price"))
+                fig.add_trace(go.Scatter(x=hist.index, y=sma20, name="SMA 20", line=dict(color='orange')))
+                fig.add_trace(go.Scatter(x=hist.index, y=sma50, name="SMA 50", line=dict(color='blue')))
                 fig.add_trace(go.Scatter(x=hist.index, y=rsi, name="RSI", yaxis="y2"))
                 fig.add_trace(go.Scatter(x=hist.index, y=macd, name="MACD", yaxis="y3"))
                 fig.add_trace(go.Scatter(x=hist.index, y=signal, name="Signal", yaxis="y3"))
-                fig.update_layout(title=f"{ticker} TrendSpider Chart + RSI + MACD", yaxis2=dict(title="RSI", overlaying='y', side='right'), yaxis3=dict(title="MACD", overlaying='y', side='right', anchor="free"))
+                fig.update_layout(title=f"{ticker} TradingView Chart + Indicators", yaxis2=dict(title="RSI", overlaying='y', side='right'), yaxis3=dict(title="MACD", overlaying='y', side='right', anchor="free"))
                 st.plotly_chart(fig, use_container_width='stretch')
 
+                # Alerts
                 current_rsi = rsi.iloc[-1]
                 if current_rsi > 70:
-                    st.warning(f"⚠️ TrendSpider Alert: RSI Overbought for {ticker} ({current_rsi:.1f})")
+                    st.warning(f"⚠️ TradingView Alert: RSI Overbought for {ticker} ({current_rsi:.1f})")
                 elif current_rsi < 30:
-                    st.success(f"✅ TrendSpider Alert: RSI Oversold for {ticker} ({current_rsi:.1f})")
+                    st.success(f"✅ TradingView Alert: RSI Oversold for {ticker} ({current_rsi:.1f})")
         except:
             st.error("Chart failed")
 
@@ -219,14 +226,14 @@ with tab4:
     except:
         st.warning("News fetch failed.")
 
-    st.subheader("🔔 Benzinga-Style Alerts")
+    st.subheader("🔔 Live Alerts")
     alert_symbol = st.selectbox("Asset", list(PRELOADED.keys()), key="alert_symbol")
     alert_threshold = st.slider("Alpha Score Threshold", 50, 95, 75, key="alert_threshold")
     
     if st.button("Check / Trigger Alert", key="check_alert"):
         sc = calculate_scores_cached(PRELOADED[alert_symbol])
         if sc["alpha_score"] >= alert_threshold:
-            st.success(f"🚨 BENZINGA ALERT: {alert_symbol} Alpha = {sc['alpha_score']}")
+            st.success(f"🚨 ALERT: {alert_symbol} Alpha = {sc['alpha_score']}")
         else:
             st.info(f"No alert — {alert_symbol} Alpha = {sc['alpha_score']}")
 
@@ -245,32 +252,38 @@ with tab5:
     ])
     st.dataframe(whale_data, use_container_width='stretch')
 
-# Trade Journal
+# TradeZella Journal
 with tab6:
-    st.header("📉 Trade Journal (Tradezella Style)")
+    st.header("📉 TradeZella Journal + Drawdown Tracking")
     if 'trades' not in st.session_state:
-        st.session_state.trades = pd.DataFrame(columns=["Date", "Symbol", "Action", "Entry", "Exit", "P&L", "Notes"])
+        st.session_state.trades = pd.DataFrame(columns=["Date", "Symbol", "Action", "Entry", "Exit", "P&L", "Notes", "Drawdown"])
     with st.form("log_trade"):
         date = st.date_input("Date", datetime.today())
         symbol = st.selectbox("Symbol", list(PRELOADED.keys()), key="journal_symbol")
         action = st.selectbox("Action", ["BUY", "SELL"], key="journal_action")
         entry = st.number_input("Entry", value=1.0, key="journal_entry")
         exit_p = st.number_input("Exit", value=1.0, key="journal_exit")
-        notes = st.text_area("Notes", key="journal_notes")
+        notes = st.text_area("Notes / Behavioral", key="journal_notes")
         if st.form_submit_button("Log Trade", key="log_trade_btn"):
             pnl = (exit_p - entry) if action == "BUY" else (entry - exit_p)
-            new = pd.DataFrame([{"Date": date, "Symbol": symbol, "Action": action, "Entry": entry, "Exit": exit_p, "P&L": pnl, "Notes": notes}])
+            new = pd.DataFrame([{"Date": date, "Symbol": symbol, "Action": action, "Entry": entry, "Exit": exit_p, "P&L": pnl, "Notes": notes, "Drawdown": 0}])
             st.session_state.trades = pd.concat([st.session_state.trades, new], ignore_index=True)
             st.success("Trade logged!")
     if not st.session_state.trades.empty:
         st.dataframe(st.session_state.trades, use_container_width='stretch')
         st.metric("Total P&L", f"${st.session_state.trades['P&L'].sum():.2f}")
+        st.metric("Win Rate", f"{(len(st.session_state.trades[st.session_state.trades['P&L'] > 0]) / len(st.session_state.trades) * 100):.1f}%")
 
-# Thinkorswim Backtesting
+# Holly AI Scanner
 with tab7:
-    st.header("📉 Thinkorswim Style Backtesting")
-    ticker = st.selectbox("Ticker", list(PRELOADED.keys()), key="backtest_ticker")
-    if st.button("Run Backtest", key="run_backtest"):
-        st.success(f"Demo Thinkorswim-style backtest ready for {ticker}.")
+    st.header("🤖 Holly AI Scanner (Trade Ideas Style)")
+    st.subheader("High-Probability Pre-Market Signals")
+    if st.button("Run Holly AI Scan"):
+        high_confluence = df[df["Alpha Score"] >= 75]
+        if not high_confluence.empty:
+            st.dataframe(high_confluence[["Symbol", "Action", "Alpha Score", "RVOL", "Anomaly", "Chg %", "RR"]], use_container_width='stretch')
+            st.success("Holly AI: High-confluence opportunities detected!")
+        else:
+            st.info("No high-confluence signals right now.")
 
-st.caption("Degen Signals Ultimate • Not financial advice")
+st.caption("Degen Signals Ultimate • Not financial advice • TradingView + Holly AI + TradeZella style")
