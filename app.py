@@ -135,4 +135,4 @@ with tab1:
     q1.metric("Total Assets Tracked", len(PRELOADED))
     q2.metric("High Alpha Signals", len([s for s in PRELOADED.values() if calculate_scores(s)["alpha_score"] > 70]))
     q3.metric("Avg Alpha Score", round(np.mean([calculate_scores(d)["alpha_score"] for d in PRELOADED.values()]), 1))
-    q
+    
