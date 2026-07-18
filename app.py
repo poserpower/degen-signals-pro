@@ -81,7 +81,7 @@ def label_wallets_real(df):
 
 labeled_wallets = label_wallets_real(user_wallets)
 
-# PRELOADED assets (safe starter - expand with your tokens)
+# PRELOADED assets
 PRELOADED = {
     "PEEPO": {"price": 0.000012, "change_pct": 45.2, "volume": 1250000},
     "SOL": {"price": 145.67, "change_pct": -1.2, "volume": 890000000},
